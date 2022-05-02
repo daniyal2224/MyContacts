@@ -63,7 +63,9 @@ namespace MyContacts
                     int contactId = int.Parse(dgContacts.CurrentRow.Cells[0].Value.ToString());
                     using (Contact_DBEntities db=new Contact_DBEntities())
                     {
-                        MyContact cotact = db.MyContacts.Single(c => c.ContactID == contactId);
+                        MyContact contact = db.MyContacts.Single(c => c.ContactID == contactId);
+                        db.MyContacts.Remove(contact);
+                        db.SaveChanges();
                     }
                     BindGrid();
                 }
